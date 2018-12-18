@@ -1,2 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="br.com.mobileti.imageeditor"/>
+          package="br.com.mobileti.imageeditor">
+
+    <application>
+        <activity android:name=".EditorActivity"
+        android:theme="@style/App"/>
+    </application>
+</manifest>
