@@ -1,5 +1,8 @@
 package br.com.mobileti.imageeditor
 
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -10,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import kotlinx.android.synthetic.main.activity_editor.*
+import java.io.File
 
 
 class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClickListener {
@@ -22,6 +26,7 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
 
     private var textArrayList: ArrayList<TextView> = arrayListOf()
     private var selectedTextView: TextView? = null
+    private var imageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +36,11 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
         setSupportActionBar(toolbar)
 
         initListeners()
+        imageUri = intent.getParcelableExtra<Uri>(URI_ARG)
+
+        imageUri.let {
+            memeImageView.setImageURI(it)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -121,6 +131,28 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
             }
         }
         return true
+    }
+
+    private fun viewToBitmap(view: View): Bitmap {
+        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        view.draw(canvas)
+        return bitmap
+    }
+
+    private fun saveFile(): String {
+        val outputDir = getCacheDir() // context being the Activity pointer
+        val outputFile = File.createTempFile("prefix", "extension", outputDir)
+        outputFile.deleteOnExit()
+
+
+        // TODO continuar
+        Uri.parse("url, caminho")
+        imageUri?.lastPathSegment?.let { filename ->
+            File.createTempFile(filename, null, cacheDir)
+        }
+
+        return outputFile.absolutePath
     }
 
     private fun initListeners() {
