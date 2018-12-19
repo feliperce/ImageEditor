@@ -14,6 +14,10 @@ import kotlinx.android.synthetic.main.activity_editor.*
 
 class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClickListener {
 
+    companion object {
+        const val URI_ARG = "uri"
+    }
+
     private val TAG = EditorActivity::class.java.simpleName
 
     private var textArrayList: ArrayList<TextView> = arrayListOf()
