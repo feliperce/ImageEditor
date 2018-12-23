@@ -1,5 +1,6 @@
 package br.com.mobileti.imageeditor
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
@@ -14,12 +15,14 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import kotlinx.android.synthetic.main.activity_editor.*
 import java.io.File
+import java.io.FileOutputStream
 
 
 class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClickListener {
 
     companion object {
         const val URI_ARG = "uri"
+        const val URI_RESULT_CODE = 6
     }
 
     private val TAG = EditorActivity::class.java.simpleName
@@ -50,8 +53,14 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-
+            R.id.item_done -> {
+                Intent().apply {
+                    putExtra(URI_ARG, getEditedImagePath())
+                    setResult(ImageEditor.RESULT_IMAGE_EDITED, this)
+                }
+            }
         }
+        finish()
         return super.onOptionsItemSelected(item)
     }
 
@@ -133,6 +142,12 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
         return true
     }
 
+    private fun getEditedImagePath(): String {
+        val bitmap = viewToBitmap(imageContainer)
+        val file = saveBitmap(bitmap)
+        return file.absolutePath
+    }
+
     private fun viewToBitmap(view: View): Bitmap {
         val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
@@ -140,19 +155,13 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
         return bitmap
     }
 
-    private fun saveFile(): String {
-        val outputDir = getCacheDir() // context being the Activity pointer
-        val outputFile = File.createTempFile("prefix", "extension", outputDir)
-        outputFile.deleteOnExit()
+    private fun saveBitmap(bitmap: Bitmap): File {
+        val file = File.createTempFile("bppppp", ".png", cacheDir)
+        val fileOutputStream = FileOutputStream(file)
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
+        fileOutputStream.close()
 
-
-        // TODO continuar
-        Uri.parse("url, caminho")
-        imageUri?.lastPathSegment?.let { filename ->
-            File.createTempFile(filename, null, cacheDir)
-        }
-
-        return outputFile.absolutePath
+        return file
     }
 
     private fun initListeners() {

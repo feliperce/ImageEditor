@@ -25,6 +25,7 @@ public class ImageEditor(val context: Context) {
     }
 
     companion object {
-        const val SAVE_RESPONSE_CODE = 10
+        const val REQUEST_IMAGE_EDIT = 9
+        const val RESULT_IMAGE_EDITED = 10
     }
 }

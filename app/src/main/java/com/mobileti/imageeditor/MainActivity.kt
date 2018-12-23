@@ -20,20 +20,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val imageEditor = ImageEditor(this)
-
         editImageFab.setOnClickListener {
-            val intent = Intent()
-// Show only images, no videos or anything else
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
-// Always show the chooser (if there are multiple options available)
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_IMAGE_PICKER)
+            Intent().apply {
+                type = "image/*"
+                action = Intent.ACTION_GET_CONTENT
+                startActivityForResult(Intent.createChooser(this, "Select Picture"), REQUEST_IMAGE_PICKER)
+            }
         }
     }
-
-//    val intent = Intent(this, EditorActivity::class.java)
-//    startActivity(intent)
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -42,15 +36,10 @@ class MainActivity : AppCompatActivity() {
 
             val uri = data.data
 
-            val imageEditor = ImageEditor(this)
+            ImageEditor(this)
                 .setImageUri(uri).create()
 
-            try {
-                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
-
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
+        } else if (requestCode == ImageEditor.REQUEST_IMAGE_EDIT && resultCode == ImageEditor.RESULT_IMAGE_EDITED) {
 
         }
     }
