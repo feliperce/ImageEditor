@@ -20,10 +20,6 @@ import java.io.FileOutputStream
 
 class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClickListener {
 
-    companion object {
-        const val URI_RESULT_CODE = 6
-    }
-
     private val TAG = EditorActivity::class.java.simpleName
 
     private var textArrayList: ArrayList<TextView> = arrayListOf()
@@ -38,7 +34,7 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
         setSupportActionBar(toolbar)
 
         initListeners()
-        imageUri = intent.getParcelableExtra<Uri>(ImageEditor.URI_ARG)
+        imageUri = intent.getParcelableExtra(ImageEditor.URI_ARG)
 
         imageUri.let {
             memeImageView.setImageURI(it)
@@ -155,7 +151,7 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
     }
 
     private fun saveBitmap(bitmap: Bitmap): File {
-        val file = File.createTempFile("bppppp", ".png", cacheDir)
+        val file = File.createTempFile("imged", ".png", cacheDir)
         val fileOutputStream = FileOutputStream(file)
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
         fileOutputStream.close()

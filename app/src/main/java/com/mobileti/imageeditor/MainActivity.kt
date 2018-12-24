@@ -33,9 +33,9 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == REQUEST_IMAGE_PICKER && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
+        if (requestCode == REQUEST_IMAGE_PICKER && resultCode == Activity.RESULT_OK) {
 
-            val uri = data.data
+            val uri = data?.data
 
             ImageEditor(this)
                 .setImageUri(uri)

@@ -4,8 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import java.lang.RuntimeException
 
-public class ImageEditor(val context: Context) {
+class ImageEditor(val context: Context) {
 
     var uri: Uri? = null
     var imageResourceId: Int? = null
@@ -21,7 +22,7 @@ public class ImageEditor(val context: Context) {
             intent.putExtra(URI_ARG, uri)
             (context as Activity).startActivityForResult(intent, REQUEST_IMAGE_EDIT)
         } else {
-
+            throw RuntimeException("Empty URI")
         }
     }
 
