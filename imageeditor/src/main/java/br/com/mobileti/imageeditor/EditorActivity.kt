@@ -63,29 +63,21 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
 
     override fun onDrag(view: View?, event: DragEvent?): Boolean {
 
-        Log.d(TAG, "onDrag: view->$view\n DragEvent$event")
         when (event?.action) {
             DragEvent.ACTION_DRAG_ENDED -> {
-                Log.d(TAG, "onDrag: ACTION_DRAG_ENDED ")
                 return true
             }
             DragEvent.ACTION_DRAG_EXITED -> {
-                Log.d(TAG, "onDrag: ACTION_DRAG_EXITED")
                 return true
             }
             DragEvent.ACTION_DRAG_ENTERED -> {
-                Log.d(TAG, "onDrag: ACTION_DRAG_ENTERED")
                 return true
             }
             DragEvent.ACTION_DRAG_STARTED -> {
-                Log.d(TAG, "onDrag: ACTION_DRAG_STARTED")
                 return true
             }
             DragEvent.ACTION_DROP -> {
-                Log.d(TAG, "onDrag: ACTION_DROP")
                 val tvState = event.localState as View
-                Log.d(TAG, "onDrag:viewX" + event.x + "viewY" + event.y)
-                Log.d(TAG, "onDrag: Owner->" + tvState.parent)
                 val tvParent = tvState.parent as ViewGroup
                 tvParent.removeView(tvState)
                 val container = view as RelativeLayout
@@ -98,7 +90,6 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
                 return true
             }
             DragEvent.ACTION_DRAG_LOCATION -> {
-                //Log.d(TAG, "onDrag: ACTION_DRAG_LOCATION")
                 return true
             }
             else -> return false
