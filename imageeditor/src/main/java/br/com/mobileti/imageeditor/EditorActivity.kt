@@ -49,12 +49,14 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.item_done -> {
+                progressBar.visibility = View.VISIBLE
                 Intent().apply {
                     putExtra(ImageEditor.URI_ARG, getEditedImagePath())
                     setResult(ImageEditor.RESULT_IMAGE_EDITED, this)
                 }
             }
         }
+        progressBar.visibility = View.GONE
         finish()
         return super.onOptionsItemSelected(item)
     }
