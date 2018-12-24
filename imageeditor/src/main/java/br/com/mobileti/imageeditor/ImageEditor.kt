@@ -1,5 +1,6 @@
 package br.com.mobileti.imageeditor
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -17,8 +18,8 @@ public class ImageEditor(val context: Context) {
     fun create() {
         if (uri != null) {
             val intent = Intent(context, EditorActivity::class.java)
-            intent.putExtra(EditorActivity.URI_ARG, uri)
-            context.startActivity(intent)
+            intent.putExtra(URI_ARG, uri)
+            (context as Activity).startActivityForResult(intent, REQUEST_IMAGE_EDIT)
         } else {
 
         }
@@ -27,5 +28,6 @@ public class ImageEditor(val context: Context) {
     companion object {
         const val REQUEST_IMAGE_EDIT = 9
         const val RESULT_IMAGE_EDITED = 10
+        const val URI_ARG = "uri"
     }
 }

@@ -21,7 +21,6 @@ import java.io.FileOutputStream
 class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClickListener {
 
     companion object {
-        const val URI_ARG = "uri"
         const val URI_RESULT_CODE = 6
     }
 
@@ -39,7 +38,7 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
         setSupportActionBar(toolbar)
 
         initListeners()
-        imageUri = intent.getParcelableExtra<Uri>(URI_ARG)
+        imageUri = intent.getParcelableExtra<Uri>(ImageEditor.URI_ARG)
 
         imageUri.let {
             memeImageView.setImageURI(it)
@@ -55,7 +54,7 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
         when (item?.itemId) {
             R.id.item_done -> {
                 Intent().apply {
-                    putExtra(URI_ARG, getEditedImagePath())
+                    putExtra(ImageEditor.URI_ARG, getEditedImagePath())
                     setResult(ImageEditor.RESULT_IMAGE_EDITED, this)
                 }
             }

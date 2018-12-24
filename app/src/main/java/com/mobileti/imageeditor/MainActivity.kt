@@ -2,6 +2,7 @@ package com.mobileti.imageeditor
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
@@ -37,10 +38,12 @@ class MainActivity : AppCompatActivity() {
             val uri = data.data
 
             ImageEditor(this)
-                .setImageUri(uri).create()
+                .setImageUri(uri)
+                .create()
 
         } else if (requestCode == ImageEditor.REQUEST_IMAGE_EDIT && resultCode == ImageEditor.RESULT_IMAGE_EDITED) {
-
+            val imagePath = data?.getStringExtra(ImageEditor.URI_ARG)
+            imageView.setImageURI(Uri.parse(imagePath))
         }
     }
 }
