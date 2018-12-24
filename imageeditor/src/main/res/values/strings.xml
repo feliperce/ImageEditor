@@ -2,15 +2,15 @@
     <string name="app_name">Image Editor</string>
 
     <string name="new_text">Informe um texto</string>
-    <string name="add_text_ok_button">OK</string>
-    <string name="add_text_dialog_title">Adicione um texto</string>
-    <string name="edit_text_dialog_title">Edite o texto</string>
+    <string name="add_text_ok_button" translatable="false">OK</string>
+    <string name="add_text_dialog_title">Add text</string>
+    <string name="edit_text_dialog_title">Edit text</string>
 
     <!-- Menu -->
-    <string name="menu_text_edit">Editar</string>
-    <string name="menu_text_resize">Redimensionar</string>
-    <string name="menu_text_remove">Remover</string>
+    <string name="menu_text_edit">Edit</string>
+    <string name="menu_text_resize">Resize</string>
+    <string name="menu_text_remove">Remove</string>
 
-    <string name="text_transform_size">Tamanho:</string>
-    <string name="text_transform_rotation">Rotação:</string>
+    <string name="text_transform_size">Size:</string>
+    <string name="text_transform_rotation">Rotation:</string>
 </resources>

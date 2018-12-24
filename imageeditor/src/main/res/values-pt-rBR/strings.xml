@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Image Editor</string>
+
+    <string name="new_text">Informe um texto</string>
+    <string name="add_text_dialog_title">Adicione um texto</string>
+    <string name="edit_text_dialog_title">Edite o texto</string>
+
+    <!-- Menu -->
+    <string name="menu_text_edit">Editar</string>
+    <string name="menu_text_resize">Redimensionar</string>
+    <string name="menu_text_remove">Remover</string>
+
+    <string name="text_transform_size">Tamanho:</string>
+    <string name="text_transform_rotation">Rotação:</string>
+</resources>
