@@ -19,12 +19,14 @@ class ColorSelectorAdapter(private val textColorList: Array<TextColor>) : Recycl
 
     override fun onBindViewHolder(holder: ColorSelectorAdapter.ColorViewHolder, position: Int) {
         val textColor = textColorList[position]
+        //holder.textColorLayout.isSelected = textColor.selected
+        //holder.textColorLayout.setBackgroundResource(R.drawable.text_color_bg)
         holder.textColorLayout.setBackgroundColor(textColor.color)
-        holder.textColorLayout.isSelected = textColor.selected
     }
 
     class ColorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textColorLayout: LinearLayout = itemView.textColorLayout
+        val textColorView: View = itemView.textColorView
     }
 
 }

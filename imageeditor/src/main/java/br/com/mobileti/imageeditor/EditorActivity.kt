@@ -209,7 +209,6 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
         TextColor(Color.GREEN, false),
         TextColor(Color.BLUE, false),
         TextColor(Color.CYAN, false),
-        TextColor(Color.DKGRAY, false),
         TextColor(Color.GRAY, false),
         TextColor(Color.LTGRAY, false),
         TextColor(Color.MAGENTA, false),
