@@ -1,21 +1,30 @@
 package br.com.mobileti.imageeditor
 
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.text_color_item.view.*
 
-class ColorSelectorAdapter(private val textColorList: Array<TextColor>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ColorSelectorAdapter(private val textColorList: Array<TextColor>) : RecyclerView.Adapter<ColorSelectorAdapter.ColorViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorSelectorAdapter.ColorViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.text_color_item, parent, false)
+        return ColorViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return textColorList.size
+    override fun getItemCount(): Int = textColorList.size
+
+
+    override fun onBindViewHolder(holder: ColorSelectorAdapter.ColorViewHolder, position: Int) {
+        val textColor = textColorList[position]
+        holder.textColorLayout.setBackgroundColor(textColor.color)
+        holder.textColorLayout.isSelected = textColor.selected
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    class ColorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val textColorLayout: LinearLayout = itemView.textColorLayout
     }
 
 }

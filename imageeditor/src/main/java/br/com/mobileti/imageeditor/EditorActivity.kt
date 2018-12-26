@@ -3,6 +3,7 @@ package br.com.mobileti.imageeditor
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_editor.*
 import java.io.File
 import java.io.FileOutputStream
@@ -166,18 +169,22 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
     }
 
     private fun showAddTextDialog() {
-        val input = EditText(this)
-        val lp = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.MATCH_PARENT
-        )
-        input.layoutParams = lp
+
+        val view = layoutInflater.inflate(R.layout.add_text_dialog, null)
+        val textEditText = view.findViewById<EditText>(R.id.textEditText)
+        val textColorRecyclerView = view.findViewById<RecyclerView>(R.id.textColorRecyclerView)
+
+        textColorRecyclerView.apply {
+            adapter = ColorSelectorAdapter(getDefaultTextColorList())
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        }
+
         AlertDialog.Builder(this)
-            .setView(input)
+            .setView(view)
             .setTitle(getString(R.string.add_text_dialog_title))
             .setPositiveButton(getString(R.string.add_text_ok_button)) { p0, p1 ->
-                if (input.text.isNotEmpty()) {
-                    createNewTextView(input.text.toString()).let { view ->
+                if (textEditText.text.isNotEmpty()) {
+                    createNewTextView(textEditText.text.toString()).let { view ->
                         view.tag = view.id.toString()
                         imageContainer.addView(view, -1)
                         view.setOnLongClickListener(this)
@@ -195,6 +202,20 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
             .create()
             .show()
     }
+
+    private fun getDefaultTextColorList(): Array<TextColor> = arrayOf(
+        TextColor(Color.WHITE, true),
+        TextColor(Color.BLACK, false),
+        TextColor(Color.GREEN, false),
+        TextColor(Color.BLUE, false),
+        TextColor(Color.CYAN, false),
+        TextColor(Color.DKGRAY, false),
+        TextColor(Color.GRAY, false),
+        TextColor(Color.LTGRAY, false),
+        TextColor(Color.MAGENTA, false),
+        TextColor(Color.RED, false),
+        TextColor(Color.YELLOW, false)
+    )
 
     private fun showResizeTextDialog(textView: TextView) {
 
