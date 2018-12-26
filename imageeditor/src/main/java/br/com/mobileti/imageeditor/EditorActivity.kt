@@ -281,23 +281,34 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
     }
 
     private fun showEditTextDialog(textView: TextView) {
-        val lp = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.MATCH_PARENT
-        )
+        val view = layoutInflater.inflate(R.layout.add_text_dialog, null)
+        val textEditText = view.findViewById<EditText>(R.id.textEditText)
+        val textColorRecyclerView = view.findViewById<RecyclerView>(R.id.textColorRecyclerView)
 
-        val input = EditText(this).apply {
-            layoutParams = lp
+        textEditText.apply {
             setText(textView.text.toString())
             setTextColor(textView.currentTextColor)
         }
 
+        val listener = object : ColorSelectorAdapter.Listener {
+            override fun onColorClickListener(color: Int) {
+                textEditText.setTextColor(color)
+            }
+        }
+
+        textColorRecyclerView.apply {
+            adapter = ColorSelectorAdapter(getDefaultTextColorList(), listener)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        }
+
         AlertDialog.Builder(this)
-            .setView(input)
+            .setView(view)
             .setTitle(getString(R.string.edit_text_dialog_title))
-            .setNegativeButton(android.R.string.cancel, null)
             .setPositiveButton(getString(R.string.add_text_ok_button)) { p0, p1 ->
-                textView.text = input.text
+                if (textEditText.text.isNotEmpty()) {
+                    textView.text = textEditText.text
+                    textView.setTextColor(textEditText.currentTextColor)
+                }
             }
             .setOnCancelListener { }
             .create()
