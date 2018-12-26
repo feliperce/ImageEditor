@@ -8,7 +8,8 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.text_color_item.view.*
 
-class ColorSelectorAdapter(private val textColorList: Array<TextColor>) : RecyclerView.Adapter<ColorSelectorAdapter.ColorViewHolder>() {
+class ColorSelectorAdapter(private val textColorList: Array<TextColor>,
+                           private val listener: Listener) : RecyclerView.Adapter<ColorSelectorAdapter.ColorViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorSelectorAdapter.ColorViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.text_color_item, parent, false)
@@ -24,11 +25,19 @@ class ColorSelectorAdapter(private val textColorList: Array<TextColor>) : Recycl
         //holder.textColorLayout.setBackgroundResource(R.drawable.text_color_bg)
         //holder.textColorLayout.setBackgroundColor(textColor.color)
         holder.textColorLayout.background.setColorFilter(textColor.color, PorterDuff.Mode.SRC_ATOP)
+
+        holder.textColorLayout.setOnClickListener {
+            listener.onColorClickListener(textColor.color)
+        }
     }
 
     class ColorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textColorLayout: LinearLayout = itemView.textColorLayout
         val textColorView: View = itemView.textColorView
+    }
+
+    interface Listener {
+        fun onColorClickListener(color: Int)
     }
 
 }

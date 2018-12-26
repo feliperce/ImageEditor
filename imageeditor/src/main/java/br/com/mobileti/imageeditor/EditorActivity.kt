@@ -174,8 +174,14 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
         val textEditText = view.findViewById<EditText>(R.id.textEditText)
         val textColorRecyclerView = view.findViewById<RecyclerView>(R.id.textColorRecyclerView)
 
+        val listener = object : ColorSelectorAdapter.Listener {
+                    override fun onColorClickListener(color: Int) {
+                        textEditText.setTextColor(color)
+                    }
+                }
+
         textColorRecyclerView.apply {
-            adapter = ColorSelectorAdapter(getDefaultTextColorList())
+            adapter = ColorSelectorAdapter(getDefaultTextColorList(), listener)
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
 
@@ -186,6 +192,7 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
                 if (textEditText.text.isNotEmpty()) {
                     createNewTextView(textEditText.text.toString()).let { view ->
                         view.tag = view.id.toString()
+                        view.setTextColor(textEditText.currentTextColor)
                         imageContainer.addView(view, -1)
                         view.setOnLongClickListener(this)
                         view.setOnClickListener {
@@ -274,13 +281,17 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
     }
 
     private fun showEditTextDialog(textView: TextView) {
-        val input = EditText(this)
         val lp = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.MATCH_PARENT
         )
-        input.layoutParams = lp
-        input.setText(textView.text.toString())
+
+        val input = EditText(this).apply {
+            layoutParams = lp
+            setText(textView.text.toString())
+            setTextColor(textView.currentTextColor)
+        }
+
         AlertDialog.Builder(this)
             .setView(input)
             .setTitle(getString(R.string.edit_text_dialog_title))
