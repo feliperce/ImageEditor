@@ -1,5 +1,6 @@
 package br.com.mobileti.imageeditor
 
+import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,9 +20,10 @@ class ColorSelectorAdapter(private val textColorList: Array<TextColor>) : Recycl
 
     override fun onBindViewHolder(holder: ColorSelectorAdapter.ColorViewHolder, position: Int) {
         val textColor = textColorList[position]
-        //holder.textColorLayout.isSelected = textColor.selected
+        holder.textColorLayout.isSelected = textColor.selected
         //holder.textColorLayout.setBackgroundResource(R.drawable.text_color_bg)
-        holder.textColorLayout.setBackgroundColor(textColor.color)
+        //holder.textColorLayout.setBackgroundColor(textColor.color)
+        holder.textColorLayout.background.setColorFilter(textColor.color, PorterDuff.Mode.SRC_ATOP)
     }
 
     class ColorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
