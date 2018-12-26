@@ -151,7 +151,7 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
         val fileOutputStream = FileOutputStream(file)
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
         fileOutputStream.close()
-
+        file.deleteOnExit()
         return file
     }
 
@@ -211,7 +211,7 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
     }
 
     private fun getDefaultTextColorList(): Array<TextColor> = arrayOf(
-        TextColor(Color.WHITE, true),
+        TextColor(Color.WHITE, false),
         TextColor(Color.BLACK, false),
         TextColor(Color.GREEN, false),
         TextColor(Color.BLUE, false),
