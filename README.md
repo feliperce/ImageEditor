@@ -1,3 +1,7 @@
+![MIT](https://img.shields.io/github/license/feliperce/ImageEditor.svg)
+[![version](https://jitpack.io/v/feliperce/ImageEditor.svg)](https://jitpack.io/#feliperce/ImageEditor)
+
+
 # ImageEditor
 
 ImageEditor is a Android Kotlin library for editing images.
