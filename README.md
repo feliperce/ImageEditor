@@ -1,10 +1,27 @@
-# RateDialog
+# ImageEditor
 
 ImageEditor is a Android Kotlin library for editing images.
 
 ![ImageEditor](https://thumbs.gfycat.com/ThoroughDeliciousAmericanlobster.webp)
 
 # Getting Started
+**Step 1.** Add the JitPack repository to your build file
+Add it in your root build.gradle at the end of repositories:
+```groovy
+allprojects {
+  repositories {
+    ...
+    maven { url 'https://jitpack.io' }
+  }
+}
+```
+
+**Step 2.** Add the dependency
+```groovy
+dependencies {
+    implementation 'com.github.feliperce:ImageEditor:0.5'
+}
+```
 
 # Usage
 
@@ -15,7 +32,7 @@ ImageEditor(this) // Context
   .setImageUri(uri) // Image URI
   .create() // Call the Image Editor
 ```
-Where you called the Image Editor, place onActivityResult, the Image Editor will cache the edited image and return your path
+Where you called the ImageEditor, place onActivityResult, the ImageEditor will cache the edited image and return your path
 
 ```kotlin
 override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
