@@ -6,7 +6,8 @@
 
 ImageEditor is a Android Kotlin library for editing images.
 
-![ImageEditor](https://github.com/feliperce/gifstore/blob/master/imageeditor/imageeditor-sample.gif)
+Sample on Youtube:
+[![Watch the video](https://i.imgur.com/EaO64vJ.png)](https://youtu.be/HKcjDqLvBJM)
 
 # Getting Started
 **Step 1.** Add the JitPack repository to your build file
