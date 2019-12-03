@@ -24,7 +24,7 @@ allprojects {
 **Step 2.** Add the dependency
 ```groovy
 dependencies {
-    implementation 'com.github.feliperce:ImageEditor:0.5'
+    implementation 'com.github.feliperce:ImageEditor:0.5.1'
 }
 ```
 
