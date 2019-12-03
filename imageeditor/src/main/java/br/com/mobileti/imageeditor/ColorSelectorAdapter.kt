@@ -22,10 +22,7 @@ class ColorSelectorAdapter(private val textColorList: Array<TextColor>,
     override fun onBindViewHolder(holder: ColorSelectorAdapter.ColorViewHolder, position: Int) {
         val textColor = textColorList[position]
         holder.textColorLayout.isSelected = textColor.selected
-        //holder.textColorLayout.setBackgroundResource(R.drawable.text_color_bg)
-        //holder.textColorLayout.setBackgroundColor(textColor.color)
         holder.textColorLayout.background.setColorFilter(textColor.color, PorterDuff.Mode.SRC_ATOP)
-
         holder.textColorLayout.setOnClickListener {
             listener.onColorClickListener(textColor.color)
         }

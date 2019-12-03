@@ -6,7 +6,6 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.*
 import android.widget.*
@@ -14,9 +13,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_editor.*
+import kotlinx.coroutines.*
 import java.io.File
 import java.io.FileOutputStream
 
@@ -53,14 +54,21 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
         when (item?.itemId) {
             R.id.item_done -> {
                 progressBar.visibility = View.VISIBLE
-                Intent().apply {
-                    putExtra(ImageEditor.URI_ARG, getEditedImagePath())
-                    setResult(ImageEditor.RESULT_IMAGE_EDITED, this)
+                lifecycleScope.launch(Dispatchers.Default) {
+                    val editedImagePath = getEditedImagePathAsync().await()
+
+                    Intent().apply {
+                        putExtra(ImageEditor.URI_ARG, editedImagePath)
+                        setResult(ImageEditor.RESULT_IMAGE_EDITED, this)
+                    }
+                    withContext(Dispatchers.Main) {
+                        progressBar.visibility = View.GONE
+                    }
+                    finish()
                 }
+
             }
         }
-        progressBar.visibility = View.GONE
-        finish()
         return super.onOptionsItemSelected(item)
     }
 
@@ -133,10 +141,12 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
         return true
     }
 
-    private fun getEditedImagePath(): String {
+    private suspend fun getEditedImagePathAsync(): Deferred<String> {
         val bitmap = viewToBitmap(imageContainer)
         val file = saveBitmap(bitmap)
-        return file.absolutePath
+        return lifecycleScope.async {
+            file.absolutePath
+        }
     }
 
     private fun viewToBitmap(view: View): Bitmap {
