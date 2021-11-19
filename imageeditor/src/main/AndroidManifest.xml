@@ -3,6 +3,7 @@
 
     <application>
         <activity android:name=".EditorActivity"
+                android:exported="true"
         android:theme="@style/App"/>
     </application>
 </manifest>

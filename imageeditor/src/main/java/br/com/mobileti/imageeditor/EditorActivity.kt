@@ -50,8 +50,8 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.item_done -> {
                 progressBar.visibility = View.VISIBLE
                 lifecycleScope.launch(Dispatchers.Default) {
@@ -66,7 +66,6 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
                     }
                     finish()
                 }
-
             }
         }
         return super.onOptionsItemSelected(item)
@@ -120,8 +119,8 @@ class EditorActivity : AppCompatActivity(), View.OnDragListener, View.OnLongClic
         menuInflater.inflate(R.menu.text_menu, menu)
     }
 
-    override fun onContextItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.editItemMenu -> {
                 selectedTextView?.let {
                     showEditTextDialog(it)
