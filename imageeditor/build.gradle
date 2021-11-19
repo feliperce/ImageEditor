@@ -3,13 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 29
-
-
+    compileSdkVersion compile_version
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 29
+        minSdkVersion minsdk_version
+        targetSdkVersion targetsdk_version
         versionCode 1
         versionName "0.5.1"
 

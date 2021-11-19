@@ -3,13 +3,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion compile_version
     defaultConfig {
         applicationId "com.mobileti.imageeditor"
-        minSdkVersion 15
-        targetSdkVersion 29
+        minSdkVersion minsdk_version
+        targetSdkVersion targetsdk_version
         versionCode 1
         versionName "10.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
