@@ -15,6 +15,10 @@ object Dependencies {
             "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
     }
 
+    object Google {
+        const val material = "com.google.android.material:material:${Versions.material}"
+    }
+
     object Junit {
         const val junit = "junit:junit:${Versions.jUnit}"
     }
