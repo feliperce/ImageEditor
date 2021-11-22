@@ -10,4 +10,12 @@ object Versions {
     const val recyclerView = "1.2.1"
     const val coroutines = "1.5.2"
     const val lifecycle = "2.4.0"
+    const val composeUi = "1.0.1"
+    const val composeTooling = "1.0.1"
+    const val composeFoundation = "1.0.1"
+    const val composeMaterial = "1.0.1"
+    const val composeMaterialIconsCore = "1.0.1"
+    const val composeMaterialIconsExtended = "1.0.1"
+    const val composeRuntimeLivedata = "1.0.1"
+    const val composeJunit4 = "1.0.1"
 }
