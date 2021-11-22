@@ -26,13 +26,13 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test:runner:$testrunner_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
+    implementation("androidx.appcompat:appcompat:$appcompat_version")
+    implementation("androidx.constraintlayout:constraintlayout:$constraintlayout_version")
+    testImplementation("junit:junit:$junit_version")
+    androidTestImplementation("androidx.test:runner:$testrunner_version")
+    androidTestImplementation("androidx.test.espresso:espresso-core:$espresso_version")
 
     implementation project(":imageeditor")
-    implementation "com.google.android.material:material:$material_version"
+    implementation("com.google.android.material:material:$material_version")
 }
